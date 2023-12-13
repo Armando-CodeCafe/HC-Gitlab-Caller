@@ -11,7 +11,7 @@ groups = {
 }
 url = "https://git.nexed.com/api/v4/"
 api_key = str(os.environ.get("API_KEY"))
-urlstring = f"{url}groups/{groups['22A']}/members?private_token={api_key}"
+urlstring = f"{url}groups/{groups['22A']}/subgroups?private_token={api_key}&per_page=100"
 print(urlstring)
 
 membersSD22A= requests.get(urlstring)
