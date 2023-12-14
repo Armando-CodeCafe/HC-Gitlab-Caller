@@ -15,17 +15,25 @@ api_key = str(os.environ.get("API_KEY"))
 group_objects={}
 for group in group_names:
     print(group)
-    urlstring = f"{url}groups/{group_names[f'{group}']}/subgroups?private_token={api_key}&per_page=100"
+    urlstring = f"{url}groups/{group_names[f'{group}']}/subgroups?private_token={api_key}&per_page=65"
+
     
     
     members =requests.get(urlstring)
     
+    member_objects =[] 
     for member in members.json():
-        id = member["id"]
-        repos_url =f"{url}groups/id/projects?private_token={api_key}&per_page=100"
+       member_objects.append(member["name"])
+       """
+        group_id = member["id"]
+        repos_url =f"{url}groups/{group_id}/projects?private_token={api_key}&per_page=65"
 
         projects = requests.get(repos_url)
-        group_objects.update({f"{id}":projects.json()})
+        member_objects.append(projects.json())
+"""
+    group_objects.update({f"{group}":member_objects})
 with open("members.json", "w") as file:
     file.write(json.dumps(group_objects))
- 
+print(group_objects["22A"][0])
+
+
